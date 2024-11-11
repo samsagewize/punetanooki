@@ -1,0 +1,136 @@
+/* Popup Overlay */
+.nooki-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup Content Box */
+.nooki-popup-content {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border: 2px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+  max-width: 90%;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Close Button Styling */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+}
+
+/* Popup Title Styling */
+.nooki-popup-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #444;
+  font-weight: bold;
+}
+
+/* Input Field Inside Popup */
+.nooki-popup-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Centered Result Section */
+.result {
+  text-align: center;
+  margin: 15px 0;
+}
+
+/* Image in Result Section */
+.result img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Upscaled Canvas for Display */
+.upscaled-canvas {
+  width: 307px; /* 40% reduction from 512px */
+  height: 307px; /* 40% reduction from 512px */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  border: 1px solid #333;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+/* Responsive Canvas Size on Smaller Screens */
+
+
+/* Search Button */
+.search-button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Download Button */
+.download-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.download-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Responsive Canvas Size on Smaller Screens */
+@media (max-width: 600px) {
+  .upscaled-canvas {
+    width: 154px; /* 40% reduction from 256px */
+    height: 154px; /* 40% reduction from 256px */
+  }
+}
