@@ -21,7 +21,7 @@ function App() {
         <h2>Punetanooki Menu</h2>
         <ul>
           <li>
-            <button onClick={openGame}>Play Game</button>
+            <button onClick={openGame}>Play</button>
           </li>
           {/* Add other menu items here if you have them */}
           <li><button>Settings</button></li>
