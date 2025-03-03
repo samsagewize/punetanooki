@@ -5,6 +5,17 @@ import Home from './components/Home';
 import About from './components/About';
 import NookiSearchPopup from './components/NookiSearchPopup';
 import nookiBanner from './assets/images/nooki_banner_112.png';
+import React from "react";
+import Game from "./components/Game";
+
+function App() {
+  return (
+    <div className="App">
+      <Game />
+    </div>
+  );
+}
+
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
