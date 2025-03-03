@@ -7,14 +7,34 @@ import NookiSearchPopup from './components/NookiSearchPopup';
 import nookiBanner from './assets/images/nooki_banner_112.png';
 import React from "react";
 import Game from "./components/Game";
+import "./App.css"; // Optional: Add menu styles here
 
 function App() {
+  const [isGameOpen, setIsGameOpen] = useState(false);
+
+  const openGame = () => setIsGameOpen(true);
+  const closeGame = () => setIsGameOpen(false);
+
   return (
     <div className="App">
-      <Game />
+      <nav className="menu">
+        <h2>Punetanooki Menu</h2>
+        <ul>
+          <li>
+            <button onClick={openGame}>Play Game</button>
+          </li>
+          {/* Add other menu items here if you have them */}
+          <li><button>Settings</button></li>
+          <li><button>Exit</button></li>
+        </ul>
+      </nav>
+
+      {isGameOpen && <Game onClose={closeGame} />}
     </div>
   );
 }
+
+export default App;
 
 
 function App() {
