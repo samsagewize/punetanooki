@@ -93,7 +93,7 @@ function Home() {
           <span className="brand-mark"><img src="/ordinooki-icon.png" alt="" /></span><span>ORDIN<span className="lime">OO</span>KI</span>
         </a>
         <div className="nav-links">
-          <a href="#radar">Treasury</a><Link to="/gallery">Gallery</Link><Link to="/forest">Forest</Link><Link to="/playground">Playground</Link>
+          <a href="#radar">Treasury</a><Link to="/gallery">Gallery</Link><Link to="/forest">Forest</Link><Link to="/playground">Playground · soon</Link>
           <a className="nav-pill" href={`https://mempool.space/address/${WALLET}`} target="_blank" rel="noreferrer">Explorer ↗</a>
         </div>
       </nav>

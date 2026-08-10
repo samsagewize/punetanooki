@@ -7,7 +7,7 @@ export default function WorldNav() {
     <div className="nav-links">
       <NavLink to="/gallery">Gallery</NavLink>
       <NavLink to="/forest">Nooki Forest</NavLink>
-      <NavLink to="/playground">Playground</NavLink>
+      <NavLink to="/playground">Playground <small className="soon-label">SOON</small></NavLink>
       <a className="nav-pill" href="https://ord.net/collection/ordinooki" target="_blank" rel="noreferrer">Marketplace ↗</a>
     </div>
   </nav>;
