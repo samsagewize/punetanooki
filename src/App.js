@@ -1,14 +1,19 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Gallery from './components/Gallery';
+import Forest from './components/Forest';
+import Playground from './components/Playground';
 
 const WALLET = 'bc1pvje9z6zmrjelcnkcuw0yggh0p9zphjtxchatjwgzvnwll8c6q40qpp5yqg';
 const MEMPOOL_API = 'https://mempool.space/api';
+const PARENT_INSCRIPTION = '00e0de1f95169a475e088ebdcdb934d7aba263b578e14027b7db2a3c5637c844i0';
 const GIFS = [1, 4, 7, 10, 13, 16, 19, 21, 23].map((number) => `/assets/memes/${number}.gif`);
 
 const short = (value, start = 8, end = 7) => `${value.slice(0, start)}…${value.slice(-end)}`;
 const satsToBtc = (sats) => (sats / 100000000).toFixed(8);
 
-function App() {
+function Home() {
   const [wallet, setWallet] = useState(null);
   const [utxos, setUtxos] = useState([]);
   const [transactions, setTransactions] = useState([]);
@@ -64,7 +69,7 @@ function App() {
           <span className="brand-mark">N</span><span>ORDIN<span className="lime">OO</span>KI</span>
         </a>
         <div className="nav-links">
-          <a href="#radar">Treasury</a><a href="#archive">GIF archive</a>
+          <a href="#radar">Treasury</a><Link to="/gallery">Gallery</Link><Link to="/forest">Forest</Link><Link to="/playground">Playground</Link>
           <a className="nav-pill" href={`https://mempool.space/address/${WALLET}`} target="_blank" rel="noreferrer">Explorer ↗</a>
         </div>
       </nav>
@@ -145,6 +150,11 @@ function App() {
         </div>
       </section>
 
+      <section className="parent-section shell">
+        <div className="parent-art"><img src={`https://render.ord.net/v6/snapshots/${PARENT_INSCRIPTION}/512.webp`} alt="Ordinoooki parent gallery inscription" /><span>INSCRIPTION #122453251</span></div>
+        <div className="parent-copy"><div className="eyebrow"><i /> COLLECTION PROVENANCE</div><h2>The parent<br />signal.</h2><p>This verified gallery inscription is the on-chain source connecting the Ordinoooki collection. One permanent artifact pointing the way to thousands of Nookis.</p><code>{short(PARENT_INSCRIPTION, 12, 10)}</code><div><a href={`https://ordinals.com/inscription/${PARENT_INSCRIPTION}`} target="_blank" rel="noreferrer">View inscription ↗</a><Link to="/gallery">Open signal gallery →</Link></div></div>
+      </section>
+
       <section className="archive shell" id="archive">
         <div className="section-heading"><div><div className="eyebrow"><i /> THE ORIGINAL ENERGY</div><h2>Still GIF. Still Nooki.</h2></div><p>The classics are not going anywhere.</p></div>
         <div className="gif-strip">{GIFS.map((gif, index) => <figure key={gif} className={index % 3 === 1 ? 'lifted' : ''}><img src={gif} alt={`Nooki GIF ${index + 1}`} loading="lazy" /><figcaption>NOOKI FILE / {String(index + 1).padStart(2, '0')}</figcaption></figure>)}</div>
@@ -153,6 +163,10 @@ function App() {
       <footer className="shell"><div className="brand"><span className="brand-mark">N</span><span>ORDIN<span className="lime">OO</span>KI</span></div><p>A strange little signal, forever on Bitcoin.</p><a href={`https://mempool.space/address/${WALLET}`} target="_blank" rel="noreferrer">TREASURY ↗</a></footer>
     </main>
   );
+}
+
+function App() {
+  return <BrowserRouter><Routes><Route path="/" element={<Home />} /><Route path="/gallery" element={<Gallery />} /><Route path="/forest" element={<Forest />} /><Route path="/playground" element={<Playground />} /></Routes></BrowserRouter>;
 }
 
 export default App;
