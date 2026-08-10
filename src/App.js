@@ -75,7 +75,7 @@ function App() {
         <p className="hero-copy">Ordinoooki lives on Bitcoin. The memes stay weird, the treasury stays transparent, and every sat can be verified.</p>
         <div className="hero-actions">
           <a className="primary" href="#radar">Open treasury radar <b>↓</b></a>
-          <a className="text-link" href="#archive">Enter the nookiverse →</a>
+          <a className="text-link" href="#marketplaces">Find an Ordinooki →</a>
         </div>
         <div className="hero-art" aria-hidden="true">
           <div className="orbit orbit-one" /><div className="orbit orbit-two" />
@@ -120,6 +120,28 @@ function App() {
               <aside className="verify-card"><span className="radar-rings"><i /></span><small>DON'T TRUST. VERIFY.</small><h3>Every treasury move is public.</h3><p>Inspect the address, UTXOs, fees and confirmations straight from the Bitcoin network.</p><a href={`https://mempool.space/address/${WALLET}`} target="_blank" rel="noreferrer">View full wallet ↗</a></aside>
             </div>
           </>}
+        </div>
+      </section>
+
+      <section className="marketplaces" id="marketplaces">
+        <div className="shell market-grid">
+          <div className="market-intro">
+            <div className="eyebrow"><i /> OFFICIAL COLLECTION LINKS</div>
+            <h2>Find your<br />Ordinoooki.</h2>
+            <p>Browse the collection and current listings through these Bitcoin Ordinals marketplaces.</p>
+          </div>
+          <div className="market-links">
+            <a href="https://ord.net/collection/ordinooki" target="_blank" rel="noreferrer">
+              <span className="market-number">01</span>
+              <span><small>EXPLORE ON</small><strong>ord.net</strong></span>
+              <b>↗</b>
+            </a>
+            <a href="https://www.satflow.com/ordinals/ordinookis" target="_blank" rel="noreferrer">
+              <span className="market-number">02</span>
+              <span><small>EXPLORE ON</small><strong>Satflow</strong></span>
+              <b>↗</b>
+            </a>
+          </div>
         </div>
       </section>
 
