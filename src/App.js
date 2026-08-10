@@ -8,6 +8,15 @@ import Playground from './components/Playground';
 const WALLET = 'bc1pvje9z6zmrjelcnkcuw0yggh0p9zphjtxchatjwgzvnwll8c6q40qpp5yqg';
 const MEMPOOL_API = 'https://mempool.space/api';
 const PARENT_INSCRIPTION = '00e0de1f95169a475e088ebdcdb934d7aba263b578e14027b7db2a3c5637c844i0';
+const ORDINAL_FALLBACK = [
+  ['038d4fe6c395b6d6951ac19a4653dba2e9c9d5685185d96877f190f9bb273b81i0','image/png'],
+  ['0c6a46e4548fd285a13dc589e78f6d993cf89249bed054bcb3990a244da18716i0','image/png'],
+  ['21c0afd7285ee488164f8c6d3077b9c748c1d77e216f06ee9b79f7f059013aa9i0','image/png'],
+  ['483ff31234a2da893333e602eefbcd3ab74f8ca159ff627003c2fc966b8db17ai0','text/plain'],
+  ['2319501f7de02faf03f9e29a29ece478c72feaa7fda011943b0aab6726a8e51di0','image/png'],
+  ['5f13643c44dc93b80a6ef5fae1036b7aaf8e3ed54688dce6fc1c7fefe155e837i0','image/png'],
+  ['4aedb33242fe58ea0982c59096ecceb936117aa28e1ad323eec47ab575ad9554i0','image/png'],
+].map(([id, contentType]) => ({ id, contentType }));
 const GIFS = [1, 4, 7, 10, 13, 16, 19, 21, 23].map((number) => `/assets/memes/${number}.gif`);
 
 const short = (value, start = 8, end = 7) => `${value.slice(0, start)}…${value.slice(-end)}`;
@@ -17,6 +26,7 @@ function Home() {
   const [wallet, setWallet] = useState(null);
   const [utxos, setUtxos] = useState([]);
   const [transactions, setTransactions] = useState([]);
+  const [ordinals, setOrdinals] = useState(ORDINAL_FALLBACK);
   const [status, setStatus] = useState('loading');
   const [copied, setCopied] = useState(false);
 
@@ -36,6 +46,9 @@ function Home() {
       setUtxos(utxoData);
       setTransactions(txData.slice(0, 4));
       setStatus('live');
+      fetch('/api/treasury-ordinals').then((response) => response.ok ? response.json() : null).then((data) => {
+        if (data?.items?.length) setOrdinals(data.items);
+      }).catch(() => {});
     } catch (error) {
       setStatus('error');
     }
@@ -106,7 +119,16 @@ function Home() {
             <div className="stats-grid">
               <article className="balance-card"><small>CONFIRMED + PENDING BALANCE</small><strong>{status === 'loading' ? '—' : balance.toLocaleString()} <em>sats</em></strong><span>{status === 'loading' ? 'Scanning…' : `₿ ${satsToBtc(balance)}`}</span><div className="pulse-line" /></article>
               <article><small>UNSPENT OUTPUTS</small><strong>{status === 'loading' ? '—' : utxos.length}</strong><span>Pieces in the vault</span></article>
-              <article><small>TRANSACTIONS</small><strong>{status === 'loading' ? '—' : wallet?.chain_stats.tx_count}</strong><span>Confirmed on Bitcoin</span></article>
+              <article><small>TREASURE ORDINALS</small><strong>{ordinals.length}</strong><span>Artifacts held on Bitcoin</span></article>
+            </div>
+
+            <div className="treasure-ordinals">
+              <div className="ordinal-title"><div><small>COMMUNITY TREASURE / ORDINALS</small><h3>Artifacts in the Nooki vault</h3></div><p>These inscriptions and the sats carrying them are held at the public treasury address. Verify every artifact on Bitcoin.</p></div>
+              <div className="ordinal-reel">{ordinals.map((item, index) => <a href={`https://ordinals.com/inscription/${item.id}`} target="_blank" rel="noreferrer" key={item.id}>
+                {item.contentType.startsWith('image/') ? <img src={`https://ordinals.com/content/${item.id}`} alt={`Nooki treasury ordinal ${index + 1}`} loading="lazy" /> : <div className="text-ordinal">TXT<span>ON-CHAIN</span></div>}
+                <span><b>TREASURE #{String(index + 1).padStart(2,'0')}</b><small>{short(item.id)}</small></span>
+              </a>)}</div>
+              <div className="treasure-note"><span>₿</span><p><strong>Bitcoin is the vault.</strong> Ordinals are digital artifacts inscribed onto individual satoshis. The radar shows both the spendable sat balance and the inscriptions currently held by the same public treasury address.</p><a href={`https://ordinals.com/address/${WALLET}`} target="_blank" rel="noreferrer">Verify all treasure ↗</a></div>
             </div>
 
             <div className="activity-grid">
