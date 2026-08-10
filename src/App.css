@@ -10,7 +10,8 @@ button { color:inherit; }
 .shell { width:min(1180px, calc(100% - 40px)); margin:auto; }
 .nav { height:86px; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:10; }
 .brand { display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.04em; font-size:19px; }
-.brand-mark { display:grid; place-items:center; width:34px; height:34px; border:1px solid #66685f; border-radius:50%; color:var(--lime); font-family:'DM Mono'; font-size:14px; }
+.brand-mark { display:grid; place-items:center; width:36px; height:36px; border:1px solid #66685f; border-radius:10px; overflow:hidden; background:#11120f; }
+.brand-mark img { width:100%; height:100%; object-fit:cover; display:block; }
 .lime { color:var(--lime); }
 .nav-links { display:flex; gap:30px; align-items:center; font-size:13px; color:#c7c7bf; }
 .nav-links a:hover { color:var(--lime); }

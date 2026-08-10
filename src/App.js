@@ -79,7 +79,7 @@ function Home() {
     <main>
       <nav className="nav shell">
         <a className="brand" href="#top" aria-label="Ordinoooki home">
-          <span className="brand-mark">N</span><span>ORDIN<span className="lime">OO</span>KI</span>
+          <span className="brand-mark"><img src="/ordinooki-icon.png" alt="" /></span><span>ORDIN<span className="lime">OO</span>KI</span>
         </a>
         <div className="nav-links">
           <a href="#radar">Treasury</a><Link to="/gallery">Gallery</Link><Link to="/forest">Forest</Link><Link to="/playground">Playground</Link>
@@ -182,7 +182,7 @@ function Home() {
         <div className="gif-strip">{GIFS.map((gif, index) => <figure key={gif} className={index % 3 === 1 ? 'lifted' : ''}><img src={gif} alt={`Nooki GIF ${index + 1}`} loading="lazy" /><figcaption>NOOKI FILE / {String(index + 1).padStart(2, '0')}</figcaption></figure>)}</div>
       </section>
 
-      <footer className="shell"><div className="brand"><span className="brand-mark">N</span><span>ORDIN<span className="lime">OO</span>KI</span></div><p>A strange little signal, forever on Bitcoin.</p><a href={`https://mempool.space/address/${WALLET}`} target="_blank" rel="noreferrer">TREASURY ↗</a></footer>
+      <footer className="shell"><div className="brand"><span className="brand-mark"><img src="/ordinooki-icon.png" alt="" /></span><span>ORDIN<span className="lime">OO</span>KI</span></div><p>A strange little signal, forever on Bitcoin.</p><a href={`https://mempool.space/address/${WALLET}`} target="_blank" rel="noreferrer">TREASURY ↗</a></footer>
     </main>
   );
 }
