@@ -4,6 +4,7 @@ import './App.css';
 import Gallery from './components/Gallery';
 import Forest from './components/Forest';
 import Playground from './components/Playground';
+import ThemeToggle from './components/ThemeToggle';
 
 const WALLET = 'bc1pvje9z6zmrjelcnkcuw0yggh0p9zphjtxchatjwgzvnwll8c6q40qpp5yqg';
 const BITCOIN_TREASURY = '3CvY72gQVJ8qS2jVmSbSSzTJBnWqCVPcK3';
@@ -94,7 +95,7 @@ function Home() {
         </a>
         <div className="nav-links">
           <a href="#radar">Treasury</a><Link to="/gallery">Gallery</Link><Link to="/forest">Forest</Link><Link to="/playground">Playground · soon</Link>
-          <a className="nav-pill" href={`https://mempool.space/address/${WALLET}`} target="_blank" rel="noreferrer">Explorer ↗</a>
+          <a className="x-nav-button" href="https://x.com/Ordinooki" target="_blank" rel="noreferrer">𝕏 Follow</a><ThemeToggle />
         </div>
       </nav>
 
@@ -200,13 +201,13 @@ function Home() {
         <div className="gif-strip">{GIFS.map((gif, index) => <figure key={gif} className={index % 3 === 1 ? 'lifted' : ''}><img src={gif} alt={`Nooki GIF ${index + 1}`} loading="lazy" /><figcaption>NOOKI FILE / {String(index + 1).padStart(2, '0')}</figcaption></figure>)}</div>
       </section>
 
-      <footer className="shell"><div className="brand"><span className="brand-mark"><img src="/ordinooki-icon.png" alt="" /></span><span>ORDIN<span className="lime">OO</span>KI</span></div><p>A strange little signal, forever on Bitcoin.</p><a href={`https://mempool.space/address/${WALLET}`} target="_blank" rel="noreferrer">TREASURY ↗</a></footer>
+      <footer className="shell"><div className="brand"><span className="brand-mark"><img src="/ordinooki-icon.png" alt="" /></span><span>ORDIN<span className="lime">OO</span>KI</span></div><p>A strange little signal, forever on Bitcoin.</p><div className="footer-links"><a href="https://x.com/Ordinooki" target="_blank" rel="noreferrer">𝕏 FOLLOW</a><a href={`https://mempool.space/address/${WALLET}`} target="_blank" rel="noreferrer">TREASURY ↗</a></div></footer>
     </main>
   );
 }
 
 function App() {
-  return <BrowserRouter><Routes><Route path="/" element={<Home />} /><Route path="/gallery" element={<Gallery />} /><Route path="/forest" element={<Forest />} /><Route path="/playground" element={<Playground />} /></Routes></BrowserRouter>;
+  return <BrowserRouter><div className="ambient-gifs" aria-hidden="true"><img src="/assets/memes/1.gif" alt="" /><img src="/assets/memes/7.gif" alt="" /><img src="/assets/memes/13.gif" alt="" /><img src="/assets/memes/21.gif" alt="" /></div><Routes><Route path="/" element={<Home />} /><Route path="/gallery" element={<Gallery />} /><Route path="/forest" element={<Forest />} /><Route path="/playground" element={<Playground />} /></Routes></BrowserRouter>;
 }
 
 export default App;

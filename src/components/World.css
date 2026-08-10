@@ -11,3 +11,4 @@
 .coming-pill { display:inline-block; margin-top:28px; padding:9px 12px; background:var(--lime); color:#11120f; font:800 10px 'DM Mono'; letter-spacing:.14em; transform:rotate(-2deg); }
 .coming-console:after { content:'SOON'; position:absolute; right:-30px; bottom:45px; color:rgba(200,255,66,.05); font-size:90px; font-weight:800; letter-spacing:-.08em; pointer-events:none; }
 .coming-console button:disabled { opacity:.55; cursor:not-allowed; }
+.world-page { position:relative; z-index:1; background-color:rgba(17,18,15,.9); }.dark-mode .gallery-page,.dark-mode .playground-page { background-color:rgba(17,18,15,.86); }.dark-mode .forest-page { background-color:rgba(12,16,10,.88); }

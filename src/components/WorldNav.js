@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 
 export default function WorldNav() {
   return <nav className="nav shell world-nav">
@@ -8,7 +9,8 @@ export default function WorldNav() {
       <NavLink to="/gallery">Gallery</NavLink>
       <NavLink to="/forest">Nooki Forest</NavLink>
       <NavLink to="/playground">Playground <small className="soon-label">SOON</small></NavLink>
-      <a className="nav-pill" href="https://ord.net/collection/ordinooki" target="_blank" rel="noreferrer">Marketplace ↗</a>
+      <a className="x-nav-button" href="https://x.com/Ordinooki" target="_blank" rel="noreferrer">𝕏 Follow</a>
+      <ThemeToggle />
     </div>
   </nav>;
 }
