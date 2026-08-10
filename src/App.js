@@ -101,7 +101,7 @@ function Home() {
 
       <section className="hero shell" id="top">
         <div className="eyebrow"><i /> CULTURE, INSCRIBED FOREVER</div>
-        <h1>Small creature.<br /><span>Big signal.</span></h1>
+        <h1>Welcome to<br /><span>Ordinookis</span></h1>
         <p className="hero-copy">Ordinoooki lives on Bitcoin. The memes stay weird, the treasury stays transparent, and every sat can be verified.</p>
         <div className="hero-actions">
           <a className="primary" href="#radar">Open treasury radar <b>↓</b></a>
