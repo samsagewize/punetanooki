@@ -6,6 +6,7 @@ import Forest from './components/Forest';
 import Playground from './components/Playground';
 
 const WALLET = 'bc1pvje9z6zmrjelcnkcuw0yggh0p9zphjtxchatjwgzvnwll8c6q40qpp5yqg';
+const BITCOIN_TREASURY = '3CvY72gQVJ8qS2jVmSbSSzTJBnWqCVPcK3';
 const MEMPOOL_API = 'https://mempool.space/api';
 const PARENT_INSCRIPTION = '00e0de1f95169a475e088ebdcdb934d7aba263b578e14027b7db2a3c5637c844i0';
 const ORDINAL_FALLBACK = [
@@ -24,6 +25,7 @@ const satsToBtc = (sats) => (sats / 100000000).toFixed(8);
 
 function Home() {
   const [wallet, setWallet] = useState(null);
+  const [bitcoinTreasury, setBitcoinTreasury] = useState(null);
   const [utxos, setUtxos] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [ordinals, setOrdinals] = useState(ORDINAL_FALLBACK);
@@ -33,16 +35,18 @@ function Home() {
   const refreshTreasury = async () => {
     setStatus('loading');
     try {
-      const [walletResponse, utxoResponse, txResponse] = await Promise.all([
+      const [walletResponse, bitcoinResponse, utxoResponse, txResponse] = await Promise.all([
         fetch(`${MEMPOOL_API}/address/${WALLET}`),
+        fetch(`${MEMPOOL_API}/address/${BITCOIN_TREASURY}`),
         fetch(`${MEMPOOL_API}/address/${WALLET}/utxo`),
         fetch(`${MEMPOOL_API}/address/${WALLET}/txs`),
       ]);
-      if (!walletResponse.ok || !utxoResponse.ok || !txResponse.ok) throw new Error('Radar unavailable');
-      const [walletData, utxoData, txData] = await Promise.all([
-        walletResponse.json(), utxoResponse.json(), txResponse.json(),
+      if (!walletResponse.ok || !bitcoinResponse.ok || !utxoResponse.ok || !txResponse.ok) throw new Error('Radar unavailable');
+      const [walletData, bitcoinData, utxoData, txData] = await Promise.all([
+        walletResponse.json(), bitcoinResponse.json(), utxoResponse.json(), txResponse.json(),
       ]);
       setWallet(walletData);
+      setBitcoinTreasury(bitcoinData);
       setUtxos(utxoData);
       setTransactions(txData.slice(0, 4));
       setStatus('live');
@@ -63,9 +67,16 @@ function Home() {
     return confirmed + pending;
   }, [wallet]);
 
-  const copyAddress = async () => {
-    await navigator.clipboard.writeText(WALLET);
-    setCopied(true);
+  const bitcoinBalance = useMemo(() => {
+    if (!bitcoinTreasury) return 0;
+    const confirmed = bitcoinTreasury.chain_stats.funded_txo_sum - bitcoinTreasury.chain_stats.spent_txo_sum;
+    const pending = bitcoinTreasury.mempool_stats.funded_txo_sum - bitcoinTreasury.mempool_stats.spent_txo_sum;
+    return confirmed + pending;
+  }, [bitcoinTreasury]);
+
+  const copyAddress = async (address, key) => {
+    await navigator.clipboard.writeText(address);
+    setCopied(key);
     window.setTimeout(() => setCopied(false), 1600);
   };
 
@@ -110,15 +121,22 @@ function Home() {
             <button className={`status ${status}`} onClick={refreshTreasury}><i /> {status === 'live' ? 'Live · refresh' : status === 'loading' ? 'Scanning chain…' : 'Retry scan'}</button>
           </div>
 
-          <div className="wallet-bar">
-            <div><small>TREASURY ADDRESS</small><strong>{short(WALLET, 12, 10)}</strong></div>
-            <button onClick={copyAddress}>{copied ? 'Copied!' : 'Copy address'}</button>
+          <div className="wallet-bars">
+            <div className="wallet-bar">
+              <div><small>ORDINALS VAULT</small><strong>{short(WALLET, 12, 10)}</strong></div>
+              <span><a href={`https://ordinals.com/address/${WALLET}`} target="_blank" rel="noreferrer">View ↗</a><button onClick={() => copyAddress(WALLET, 'ordinals')}>{copied === 'ordinals' ? 'Copied!' : 'Copy'}</button></span>
+            </div>
+            <div className="wallet-bar">
+              <div><small>BITCOIN TREASURY</small><strong>{short(BITCOIN_TREASURY, 12, 10)}</strong></div>
+              <span><a href={`https://mempool.space/address/${BITCOIN_TREASURY}`} target="_blank" rel="noreferrer">View ↗</a><button onClick={() => copyAddress(BITCOIN_TREASURY, 'bitcoin')}>{copied === 'bitcoin' ? 'Copied!' : 'Copy'}</button></span>
+            </div>
           </div>
 
           {status === 'error' ? <div className="error-card">The radar lost signal. The wallet is safe—check it directly on the explorer or try again.</div> : <>
             <div className="stats-grid">
-              <article className="balance-card"><small>CONFIRMED + PENDING BALANCE</small><strong>{status === 'loading' ? '—' : balance.toLocaleString()} <em>sats</em></strong><span>{status === 'loading' ? 'Scanning…' : `₿ ${satsToBtc(balance)}`}</span><div className="pulse-line" /></article>
-              <article><small>UNSPENT OUTPUTS</small><strong>{status === 'loading' ? '—' : utxos.length}</strong><span>Pieces in the vault</span></article>
+              <article className="balance-card"><small>COMBINED COMMUNITY TREASURY</small><strong>{status === 'loading' ? '—' : (balance + bitcoinBalance).toLocaleString()} <em>sats</em></strong><span>{status === 'loading' ? 'Scanning…' : `₿ ${satsToBtc(balance + bitcoinBalance)}`}</span><div className="pulse-line" /></article>
+              <article><small>BITCOIN TREASURY</small><strong>{status === 'loading' ? '—' : bitcoinBalance.toLocaleString()}</strong><span>sats · {bitcoinTreasury?.chain_stats.tx_count || 0} transactions</span></article>
+              <article><small>ORDINALS VAULT BTC</small><strong>{status === 'loading' ? '—' : balance.toLocaleString()}</strong><span>sats · {utxos.length} protected outputs</span></article>
               <article><small>TREASURE ORDINALS</small><strong>{ordinals.length}</strong><span>Artifacts held on Bitcoin</span></article>
             </div>
 

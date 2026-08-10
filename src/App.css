@@ -44,9 +44,9 @@ button { color:inherit; }
 .status { border:1px solid #c8c8bf; background:transparent; padding:10px 14px; font:500 10px 'DM Mono'; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
 .status i { display:inline-block; width:6px; height:6px; border-radius:50%; background:#75a400; margin-right:7px; }.status.loading i { animation:blink 1s infinite; }.status.error i { background:#e45a3d; }
 @keyframes blink { 50% { opacity:.2; } }
-.wallet-bar { border-top:1px solid #c8c8bf; border-bottom:1px solid #c8c8bf; padding:18px 0; display:flex; justify-content:space-between; align-items:center; }
+.wallet-bars { border-top:1px solid #c8c8bf; }.wallet-bar { border-bottom:1px solid #c8c8bf; padding:16px 0; display:flex; justify-content:space-between; align-items:center; }
 .wallet-bar div { display:flex; align-items:center; gap:22px; min-width:0; }.wallet-bar small,.stats-grid small,.verify-card small { font:500 10px 'DM Mono'; letter-spacing:.12em; color:#74766e; }.wallet-bar strong { font:500 13px 'DM Mono'; }.wallet-bar button { border:0; background:#171812; color:white; padding:10px 14px; cursor:pointer; font-size:11px; }
-.stats-grid { display:grid; grid-template-columns:2fr 1fr 1fr; border-bottom:1px solid #c8c8bf; }
+.wallet-bar>span { display:flex; align-items:center; gap:8px; }.wallet-bar>span>a { font:9px 'DM Mono'; color:#527300; padding:9px; }.stats-grid { display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; border-bottom:1px solid #c8c8bf; }
 .stats-grid article { min-height:205px; padding:32px; border-right:1px solid #c8c8bf; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden; }.stats-grid article:first-child { padding-left:0; }.stats-grid article:last-child { border:0; }
 .stats-grid strong { font-size:47px; letter-spacing:-.06em; }.stats-grid strong em { font-size:15px; letter-spacing:0; font-style:normal; }.stats-grid span { color:#76786f; font-size:12px; }
 .balance-card .pulse-line { position:absolute; height:80px; left:0; right:0; bottom:8px; opacity:.13; background:linear-gradient(135deg,transparent 0 25%,#507600 25% 26%,transparent 26% 48%,#507600 48% 49%,transparent 49% 65%,#507600 65% 66%,transparent 66%); }
