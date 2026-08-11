@@ -8,7 +8,7 @@ export default function WorldNav() {
     <div className="nav-links">
       <NavLink to="/gallery">Gallery</NavLink>
       <NavLink to="/forest">Nooki Forest</NavLink>
-      <NavLink to="/playground">Playground <small className="soon-label">SOON</small></NavLink>
+      <NavLink to="/playground">Playground <small className="soon-label">BETA</small></NavLink>
       <a className="x-nav-button" href="https://x.com/Ordinooki" target="_blank" rel="noreferrer">𝕏 Follow</a>
       <ThemeToggle />
     </div>

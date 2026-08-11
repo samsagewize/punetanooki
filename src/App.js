@@ -94,7 +94,7 @@ function Home() {
           <span className="brand-mark"><img src="/ordinooki-icon.png" alt="" /></span><span>ORDIN<span className="lime">OO</span>KI</span>
         </a>
         <div className="nav-links">
-          <a href="#radar">Treasury</a><Link to="/gallery">Gallery</Link><Link to="/forest">Forest</Link><Link to="/playground">Playground · soon</Link>
+          <a href="#radar">Treasury</a><Link to="/gallery">Gallery</Link><Link to="/forest">Forest</Link><Link to="/playground">Playground · beta</Link>
           <a className="x-nav-button" href="https://x.com/Ordinooki" target="_blank" rel="noreferrer">𝕏 Follow</a><ThemeToggle />
         </div>
       </nav>
